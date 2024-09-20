@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%; 
+            margin: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+            font-family: 'Dancing Script', cursive;
+        }
+        .container {
+            text-align: center;
+        }
+        p {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= randomquote.quote %></h1>
+        <p><%= randomquote.author %></p>
+    </div>
+</body>
+</html>
