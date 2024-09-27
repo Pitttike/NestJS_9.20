@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Controller, Get, Param, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotesArray } from './public/quotes';
 
@@ -67,4 +67,49 @@ export class AppController {
     };
   }
 
+@Get('search')
+@Render('idezetKereses')
+getQuoteBySearch(@Query('reszlet') reszlet : string) {
+  let searchedQuotes :string[]  = []
+  quotesArray.quotes.forEach(element => {
+    if (element.quote.includes(reszlet)) {
+      searchedQuotes.push(element.quote)
+    }
+  });
+  return {
+    searchedQuotes
+  }
+}
+
+@Get('authorRandomForm')
+@Render('authorRandomForm')
+getAuthor() {
+
+}
+
+@Get('randomAuthor')
+@Render('randomAuthor')
+getRandomAuthor(@Query('randomSzerzo') randomAuthor : string) {
+  let authorQuotes : string[]=[]
+  quotesArray.quotes.forEach(element => {
+      if(element.author == randomAuthor) {
+        authorQuotes.push(element.quote)
+      }
+  });
+
+  let random = Math.floor(Math.random() * authorQuotes.length);
+    return {
+      randomquote : authorQuotes[random]
+    }
+}
+
+
+@Get('highlight/:id')
+@Render('highlightDetail')
+getQuoteWithHighlight(@Param('id') id : string, @Query('szovegreszlet') szovegreszlet : string) {
+
+  let quote = quotesArray.quotes[id].quote
+  let quotewithhighlight = quote.replace(szovegreszlet, "<b>" + szovegreszlet + "</b>")
+  return { quotewithhighlight}
+}
 }
